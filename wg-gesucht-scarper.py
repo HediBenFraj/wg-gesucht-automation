@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
@@ -141,7 +142,9 @@ if __name__ == "__main__":
     chrome_driver_path = '/home/hedi_ben_fraj/chromedriver'  # Update with the actual path to chromedriver
     
     # Create a Chrome WebDriver instance
-    driver = webdriver.Chrome(executable_path=chrome_driver_path)
+    service = Service(executable_path=chrome_driver_path)
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Chrome(service=service, options=options)
     offers = []
   
     # Navigate to a website

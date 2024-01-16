@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time 
@@ -13,8 +14,8 @@ message = "Lieber {},\n\nich hoffe, dass diese Nachricht dich gut erreicht. Mein
 wg_gesucht_offers= []
 sent_offers=[]
 
-wg_gesucht_login = "example@domain.exp"
-wg_gesucht_password = "**********" # better add this to env variable 
+wg_gesucht_login = "example@example.exp"
+wg_gesucht_password = "***********" # better add this to env variable 
 
 with open(wg_gesucht_output_file_path, "r") as json_file:
     # Load the JSON data from the file into a Python dictionary
@@ -26,7 +27,9 @@ with open(sent_offers_file_path, "r") as json_file:
 
 chrome_driver_path = '/home/hedi_ben_fraj/chromedriver'
 print("Number of offers :",len(wg_gesucht_offers))
-driver = webdriver.Chrome(executable_path=chrome_driver_path)
+service = Service(executable_path=chrome_driver_path)
+options = webdriver.ChromeOptions()
+driver = webdriver.Chrome(service=service, options=options)
 driver.get('https://www.wg-gesucht.de/')  # Replace with the URL of the website you want to visit
 time.sleep(1)
 accept_cookies_button = driver.find_element(By.CSS_SELECTOR,"#cmpwelcomebtnyes > a")
