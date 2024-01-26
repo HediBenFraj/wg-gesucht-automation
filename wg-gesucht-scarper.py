@@ -60,8 +60,10 @@ async def main_process(driver,final_offers):
 
     # start handeling filtered offers
     i = 0
+    print("Found {} offers".format(len(price_fitered_offers)))
     while i<len(price_fitered_offers):
         try:
+            print("######### 0000")
             filtered_offer= price_fitered_offers[i]
             print("############# PROCESSING OFFFER ############\n\n")
             offer_id = filtered_offer.get_attribute("id") 
@@ -73,6 +75,7 @@ async def main_process(driver,final_offers):
             final_offer['surface'] = surface_element.text
             final_offer['href']= link.get_attribute("href")
             location = "koln"
+            print("######### 1111")
             try:
                 location = link.get_attribute("href").split('/')[3].split(".")[0].split("-")[4:]
             except Exception as e:
@@ -89,6 +92,7 @@ async def main_process(driver,final_offers):
                 for feature_index,features_element in enumerate(features_elements):
                     print("translating feature {} out of {}".format(feature_index+1,len(features_elements)))
                     translated_feature = translator.translate(features_element.text, src="de", dest="en")
+                    print(translated_feature.text)
                     features.append(translated_feature.text)
 
                 description_tabs_elements = driver.find_elements(By.CSS_SELECTOR,"#main_column > div:nth-child(9) > div:nth-child(1) > div > div")
@@ -139,7 +143,7 @@ async def count_matching_criterias(offers):
 if __name__ == "__main__":
 
     # Set the path to the ChromeDriver executable
-    chrome_driver_path = '/home/hedi_ben_fraj/chromedriver'  # Update with the actual path to chromedriver
+    chrome_driver_path = '/usr/lib/chromium-browser/chromedriver'  # Update with the actual path to chromedriver
     
     # Create a Chrome WebDriver instance
     service = Service(executable_path=chrome_driver_path)
@@ -148,7 +152,7 @@ if __name__ == "__main__":
     offers = []
   
     # Navigate to a website
-    driver.get('https://www.wg-gesucht.de/1-zimmer-wohnungen-in-Koeln.73.1.1.0.html?offer_filter=1&city_id=73&sort_order=0&noDeact=1&categories%5B%5D=1&rent_types%5B%5D=2&sMin=30&rMax=850&radDis=5000&fur=1&sin=2&exc=2&kit=1&img_only=1')  # Replace with the URL of the website you want to visit
+    driver.get('https://www.wg-gesucht.de/1-zimmer-wohnungen-in-Koeln.73.1.1.0.html?offer_filter=1&city_id=73&sort_order=0&noDeact=1&categories%5B%5D=1&rent_types%5B%5D=2&sMin=25&rMax=800&radDis=5000&fur=1&sin=2&exc=2&kit=1&img_only=1')  # Replace with the URL of the website you want to visit
     time.sleep(1)
     accept_cookies_button = driver.find_element(By.CSS_SELECTOR,"#cmpwelcomebtnyes > a")
     accept_cookies_button.click()

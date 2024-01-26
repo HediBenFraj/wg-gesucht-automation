@@ -14,8 +14,8 @@ message = "Lieber {},\n\nich hoffe, dass diese Nachricht dich gut erreicht. Mein
 wg_gesucht_offers= []
 sent_offers=[]
 
-wg_gesucht_login = "example@example.exp"
-wg_gesucht_password = "***********" # better add this to env variable 
+wg_gesucht_login = "hedibenfraj98@gmail.com"
+wg_gesucht_password = "1236987450HediBenFraj." # better add this to env variable 
 
 with open(wg_gesucht_output_file_path, "r") as json_file:
     # Load the JSON data from the file into a Python dictionary
@@ -25,7 +25,7 @@ with open(sent_offers_file_path, "r") as json_file:
     # Load the JSON data from the file into a Python dictionary
     sent_offers = json.load(json_file)
 
-chrome_driver_path = '/home/hedi_ben_fraj/chromedriver'
+chrome_driver_path = '/usr/lib/chromium-browser/chromedriver'
 print("Number of offers :",len(wg_gesucht_offers))
 service = Service(executable_path=chrome_driver_path)
 options = webdriver.ChromeOptions()
